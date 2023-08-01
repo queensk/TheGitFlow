@@ -200,3 +200,129 @@ The `-a` option shows both local and remote branches. The output will look somet
 ```
 
 The asterisk (\*) indicates the current branch that you are on. The `remotes/origin/HEAD` pointer indicates the default branch of the remote server.
+
+## git checkout
+
+This command allows you to switch between branches in your local branch. It also allows you to create a new branch and switch to it in one command, by using the `-b` option. You can specify the name of the branch that you want to checkout, or use a commit hash or a tag to checkout a specific version of your code.
+
+For example, if you want to switch to the `feature` branch that you have created, you can run:
+
+```bash
+git checkout feature
+```
+
+This will update your working tree and your `HEAD` pointer to point to the `feature` branch. If you run `git status`, you will see something like this:
+
+```bash
+On branch feature
+nothing to commit, working tree clean
+```
+
+This means that you are now on the `feature` branch, and that you have no changes in your working tree.
+
+If you want to create a new branch called `bugfix` and switch to it in one command, you can run:
+
+```bash
+git checkout -b bugfix
+```
+
+This will create a new branch that points to the same commit as your current branch, and switch to it. If you run `git status`, you will see something like this:
+
+```bash
+On branch bugfix
+nothing to commit, working tree clean
+```
+
+This means that you are now on the `bugfix` branch, and that you have no changes in your working tree.
+
+## git merge
+
+This command allows you to combine the changes from one branch into another branch. It creates a new commit that has two parents: the current branch and the branch that you want to merge. You can specify the name of the branch that you want to merge, or use the default value if you have set it before.
+
+For example, if you want to merge the `feature` branch into the `main` branch, you can run:
+
+```bash
+git checkout main
+git merge feature
+```
+
+This will switch to the `main` branch, and merge the changes from the `feature` branch into it. If there are no conflicts between the two branches, git will automatically create a new commit and update your working tree. If there are conflicts, git will ask you to resolve them manually before completing the merge.
+
+If you run `git status` after merging the branches, you will see something like this:
+
+```bash
+On branch main
+Your branch is ahead of 'origin/main' by 2 commits.
+  (use "git push" to publish your local commits)
+
+nothing to commit, working tree clean
+```
+
+This means that you have created two new commits that are not yet pushed to the remote server: one for creating the `feature` branch, and one for merging it with the `main` branch.
+
+## git log
+
+This command shows the history of your commits in your repository. It displays the hash, author, date, and message of each commit, as well as the branches and tags that point to them. You can use various options to filter or format the output of this command.
+
+For example, if you want to see the last five commits in your repository, you can run:
+
+```bash
+git log -5
+```
+
+The `-5` option limits the output to five commits. The output will look something like this:
+
+```bash
+commit 9f8a9f8a9f8a9f8a9f8a9f8a9f8a9f8a9f8a9f8a (HEAD -> main)
+Merge: 4f6a9f8 7d6b7d6
+Author: username <queenskisivuli@gmial.com>
+Date:   Tue Aug 1 13:35:06 2023 +0300
+
+    Merge feature branch into main
+
+commit 7d6b7d67d6b7d67d6b7d67d6b7d67d6b7d67d6b7 (feature)
+Author: username <queenskisivuli@gmial.com>
+Date:   Tue Aug 1 13:35:06 2023 +0300
+
+    Add some feature
+
+commit 4f6a9f8c9d7f8e8a9f8a9f8a9f8a9f8a9f8a9f8a (origin/main)
+Author: username <queenskisivuli@gmial.com>
+Date:   Tue Aug 1 13:35:06 2023 +0300
+
+    Add README.md file
+
+commit 3e5c3e5c3e5c3e5c3e5c3e5c3e5c3e5c3e5c3e5c
+Author: username <queenskisivuli@gmial.com>
+Date:   Tue Aug 1 13:35:06 2023 +0300
+
+    Initial commit
+
+commit 2d4d2d4d2d4d2d4d2d4d2d4d2d4d2d4d2d4d2d4d
+Author: username <queenskisivuli@gmial.com>
+Date:   Tue Aug 1 13:35:06 2023 +0300
+
+    Create TheGitFlow repository
+```
+
+The `Merge:` line indicates that the commit is a merge commit, and shows the hashes of the two parents. The `HEAD -> main` pointer indicates the current commit and branch that you are on. The `origin/main` pointer indicates the remote branch that is synchronized with your local branch.
+
+If you want to see the graphical representation of your commit history, you can run:
+
+```bash
+git log --graph --oneline --decorate
+```
+
+The `--graph` option draws a text-based graph of the branches and merges. The `--oneline` option shows each commit in a single line. The `--decorate` option shows the branch and tag names that point to each commit. The output will look something like this:
+
+```bash
+*   9f8a9f8 (HEAD -> main) Merge feature branch into main
+|\
+| * 7d6b7d6 (feature) Add some feature
+* | 4f6a9f8 (origin/main) Add README.md file
+|/
+* 3e5c3e5 Initial commit
+* 2d4d2d4 Create git-tutorial-markdown repository
+```
+
+The asterisks (\*) indicate the commits, and the lines indicate the branches and merges. The pointers indicate the names of the branches and tags that point to each commit.
